@@ -11,6 +11,9 @@ class Training:
                  duration: float,
                  weight: float,
                  ) -> None:
+        self.action = action
+        self.duration = duration
+        self.weight = weight
         pass
 
     def get_distance(self) -> float:
@@ -37,6 +40,7 @@ class Running(Training):
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
+    super().__init__(Training)
     pass
 
 
