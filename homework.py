@@ -5,22 +5,27 @@ class InfoMessage:
 
 class Training:
     """Базовый класс тренировки."""
+    M_IN_KM: int = 1000
 
     def __init__(self,
                  action: int,
                  duration: float,
                  weight: float,
+                 LEN_STEP: float,
                  ) -> None:
         self.action = action
         self.duration = duration
         self.weight = weight
+        self.LEN_STEP = LEN_STEP
         pass
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
+        return ((self.action*self.LEN_STEP / M_IN_KM)) 
         pass
 
     def get_mean_speed(self) -> float:
+        return self.get_distance() / self.duration
         """Получить среднюю скорость движения."""
         pass
 
@@ -35,12 +40,22 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
+    def get_spent_calories(self) -> float:
+        run_cal_1: int = 18
+        run_cal_2: int = 20
+        (run_cal_1 * self.get_mean_speed() - run_cal_2) * self.weight / M_IN_KM * self.duration 
     pass
 
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    super().__init__(Training)
+    super().__init__(Training, height: float)
+    self.height = height
+    def get_spent_calories(self) -> float:
+        walc_cal_1: float = 0.035
+        walc_cal_2: float = 0.029
+        walc_cal_1
+
     pass
 
 
