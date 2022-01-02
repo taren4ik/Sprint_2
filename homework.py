@@ -16,7 +16,7 @@ class Training:
         self.action = action
         self.duration = duration
         self.weight = weight
-        self.LEN_STEP = LEN_STEP
+        self.LEN_STEP = 0.65
         pass
 
     def get_distance(self) -> float:
@@ -43,7 +43,7 @@ class Running(Training):
     def get_spent_calories(self) -> float:
         run_cal_1: int = 18
         run_cal_2: int = 20
-        (run_cal_1 * self.get_mean_speed() - run_cal_2) * self.weight / M_IN_KM * self.duration 
+        (run_cal_1 * seper().get_mean_spee - run_cal_2) * self.weight / M_IN_KM * self.duration 
     pass
 
 
@@ -54,13 +54,29 @@ class SportsWalking(Training):
     def get_spent_calories(self) -> float:
         walc_cal_1: float = 0.035
         walc_cal_2: float = 0.029
-        walc_cal_1
+        walc_cal_3: int = 2
+        return (walc_cal_1 * self.weight + (super().get_mean_speed()**walc_cal_3 // self.height) * walc_cal_2 * self.weight) * self.duration
 
     pass
 
 
-class Swimming(Training):
+class Swimming(Training, length_pool: float, count_pool: float):
     """Тренировка: плавание."""
+        
+        super().LEN_STEP
+        self.LEN_STEP = 1.38
+
+
+    def get_mean_speed()-> float:
+        self.lenght_pool * self.count_pool / M_IN_KM /self.duration
+ 
+
+
+
+    def get_spent_calories(self) -> float:
+        swim_cal_1: float = 1.1
+        swim_cal_2: float = 2
+        (super().get_mean_speed() + swim_cal_1) * swim_cal_2 * self.weight  
     pass
 
 
