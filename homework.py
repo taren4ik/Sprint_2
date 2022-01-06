@@ -15,15 +15,14 @@ class InfoMessage:
 
     def get_message(self) -> str:
         training_type = self.training_type
-        duration = round(self.duration, 3)
-        distance = round(self.distance, 3) 
-        speed = round(self.speed, 3)
-        calories = round(self.calories, 3)
-
+        duration = self.duration
+        distance = self.distance
+        speed = self.speed
+        calories = self.calories
         msg: str = (f'Тип тренировки: {training_type};'
-        f'Длительность: {duration} ч.; Дистанция: {distance} км;' 
-        f'Ср. скорость: {speed} км/ч; Потрачено ккал: {calories}.')
-        return msg
+        f' Длительность: {duration:.3f} ч.; Дистанция: {distance:.3f} км;' 
+        f' Ср. скорость: {speed:.3f} км/ч; Потрачено ккал: {calories:.3f}.')
+        return (msg)
 
 
 class Training:
@@ -61,8 +60,7 @@ class Training:
         distance = self.get_distance()
         speed = self.get_mean_speed()
         calories = self.get_spent_calories()   
-        return (InfoMessage(training_type, duration, distance, speed, calories)
-        .get_message())
+        return InfoMessage(training_type, duration, distance, speed, calories)
 
 
 class Running(Training):
@@ -114,8 +112,6 @@ class Swimming(Training):
                  )
         self.length_pool = length_pool
         self.count_pool = count_pool
-        
-
 
     def get_mean_speed(self) -> float:
         return (self.length_pool * self.count_pool / Training.M_IN_KM /
@@ -134,12 +130,12 @@ def read_package(workout_type: str, data: list) -> Training:
     'RUN': Running,
     'WLK': SportsWalking
     } 
-    return (train_dict[workout_type])(*data) #создаем объект соответ. класса и передаем данные от датчиков
+    return train_dict[workout_type](*data) #создаем объект соответвествующего подкласса и передаем данные с датчиков
 
 
 def main(training: Training) -> None:
     """Главная функция."""
-    info = type(training).show_training_info()
+    info = training.show_training_info()
     print (info.get_message())
 
 
